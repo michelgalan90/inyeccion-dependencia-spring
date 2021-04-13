@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Inserta el titulo aqui</title>
+</head>
+<body>
+<h1 th:text="${titulo}"></h1>
+<h3 th:text="${factura.descripcion}"></h3>
+<div>Cliente: <span th:text="${factura.cliente.nombre + ' ' + factura.cliente.apellido}"></span></div>
+<h4>Detalle de la factura</h4>
+
+<table>
+    <thead>
+        <tr>
+            <td>Producto</td>
+            <td>Precio</td>
+            <td>Cantidad</td>
+            <td>Total</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item: ${factura.items}">
+            <td th:text="${item.producto.nombre}"></td>
+            <td th:text="${item.producto.precio}"></td>
+            <td th:text="${item.cantidad}"></td>
+<!--            <td th:text="${item.producto.precio * item.cantidad}"></td>-->
+            <!--la linea de arriba y este de abajo hace lo mismo, abajo usando el metodo de ItemFactura
+            y arriba usando directamente item del foreach-->
+            <td th:text="${item.calcularTotal()}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
